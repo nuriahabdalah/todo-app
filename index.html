@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Todoist-style To-Do App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">🗂️</div>
+        <div class="title">Todoist Diana</div>
+      </div>
+
+      <div class="profile">Diana Mukulu ·</div>
+
+      <nav id="views" class="nav">
+        <button data-view="inbox" class="active">Inbox</button>
+        <button data-view="today">Today</button>
+        <button data-view="upcoming">Upcoming</button>
+      </nav>
+
+      <div class="filters">
+        <label>
+          <input type="search" id="search" placeholder="Search tasks..." />
+        </label>
+        <select id="filterSelect" title="Filter">
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="overdue">Overdue</option>
+        </select>
+        <select id="sortSelect">
+          <option value="duedate_asc">Due date ↑</option>
+          <option value="duedate_desc">Due date ↓</option>
+        </select>
+        <button id="darkToggle" class="ghost">Dark</button>
+      </div>
+
+      <div class="api-box">
+        <div class="muted">API endpoint</div>
+        <div id="api-url" class="api-url"></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1 id="pageTitle">Inbox</h1>
+        <div class="status-area">
+          <span id="status" class="muted">Loading...</span>
+          <button id="refreshBtn" class="ghost">Refresh</button>
+        </div>
+      </header>
+
+      <section class="add-area">
+        <input id="titleInput" type="text" placeholder="Task title (required)" />
+        <textarea id="descInput" rows="2" placeholder="Description (optional)"></textarea>
+        <div class="row">
+          <input id="dueInput" type="datetime-local" />
+          <button id="addBtn" class="primary">Add task</button>
+        </div>
+      </section>
+
+      <section id="listArea" class="list-area">
+        <!-- tasks will render here -->
+      </section>
+    </main>
+  </div>
+
+  <!-- Edit modal -->
+  <div id="modal" class="overlay hidden" aria-hidden="true">
+    <div class="modal">
+      <h3>Edit Task</h3>
+      <input id="editTitle" placeholder="Title" />
+      <textarea id="editDesc" rows="3" placeholder="Description"></textarea>
+      <input id="editDue" type="datetime-local" />
+      <div class="modal-actions">
+        <button id="cancelEdit" class="ghost">Cancel</button>
+        <button id="saveEdit" class="primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm delete -->
+  <div id="confirmModal" class="overlay hidden" aria-hidden="true">
+    <div class="modal">
+      <h3>Confirm delete</h3>
+      <p>Are you sure you want to delete this task? This can't be undone.</p>
+      <div class="modal-actions">
+        <button id="cancelDelete" class="ghost">Cancel</button>
+        <button id="confirmDelete" class="danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
